@@ -1,0 +1,12 @@
+{% extends "admin/base.html" %}
+
+{% load staticfiles %}
+
+{% block title %}{{ profile_user.username }}{% endblock %}
+
+{% block body_block %}
+    {% if profile_user.is_authenticated %}
+        <h1>{{ profile_user.username }} welcome to your profile page</h1>
+{#        <img src="{{ profile_user. }}">#}
+    {% endif %}
+{% endblock %}
