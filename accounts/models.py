@@ -14,9 +14,17 @@ class User(AbstractUser):
     belongs = models.ManyToManyField(Grade, through='Belong')
     objects = auth_models.UserManager()
 
+    def get_full_name(self):
+        return '%s %s' % (self.last_name, self.first_name)
+
 
 class Belong(models.Model):
     user = models.ForeignKey(User)
     grade = models.ForeignKey(Grade)
     start_time = models.DateField()
     end_time = models.DateField(null=True, blank=True)
+
+
+# class UserProfile(models.Model):
+#     user = models.ForeignKey(User, unique=True)
+#     image = models.ImageField(upload_to='', blank=True, null=True)

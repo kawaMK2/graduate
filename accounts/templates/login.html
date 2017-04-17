@@ -1,4 +1,4 @@
-{% extends "admin/base.html" %} {# ① #}
+{% extends "base.html" %} {# ① #}
 
 {% block content %}
 
@@ -7,26 +7,30 @@
     <p>Your usernamne and password didn't match. Please try again.</p>
   </div>
 {% endif %}
+    <div class="left-panel">
+        <div class="card">
+            <form action="{% url 'login' %}" method="post">
+                {% csrf_token %}
+                <div class="card-content">
+                    <span class="card-title gray-text text-darken-2">Login</span>
+                    <div class="row">
+                        <div class="input-field col s12 required" id="id_username_container">
+                            <i class="material-icons prefix">account_box</i>
+                            <input id="id_username" name="username" type="text">
+                            <label for="id_username">Username</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12 required" id="id_password_container">
+                            <i class="material-icons prefix">lock_open</i>
+                            <input id="id_password" name="password" type="password">
+                            <label for="id_password">Password</label>
+                        </div>
+                    </div>
+                    <button type="submit" class="waves-effect waves-light btn">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
-<div class="panel panel-primary">
-  <div class="panel-heading">
-    <h3 class="panel-title text-center">Log-in to mysite</h3>
-  </div>
-  <div class="panel-body">
-    <form action="{% url 'login' %}" method="post" role="form">
-      {% csrf_token %}
-      <div class="input-group" style="margin-bottom:10px">
-        <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-        <input id="id_username" name="username" type="text" value="" maxlength="256" placeholder="Username" aria-describedby="sizing-addon1" autofocus required/> {# ② #}
-      </div>
-      <div class="input-group" style="margin-bottom:10px">
-        <span class="input-group-addon"><i class="fa fa-lock fa-fw"></i></span>
-        <input id="id_password" name="password" type="password" value="" maxlength="256" placeholder="Pasword" aria-describedby="sizing-addon1" required/> {# ② #}
-      </div>
-
-      <button type="submit" style="margin-bottom:-20px"><i class="fa fa-sign-in">Login</i></button>
-      <input name="next" type="hidden" value="{{ next }}"/> {# ③ #}
-    </form>
-  </div>
-</div>
 {% endblock %}
