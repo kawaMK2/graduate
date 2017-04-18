@@ -26,6 +26,8 @@ class Belong(models.Model):
     end_time = models.DateField(null=True, blank=True)
 
 
-# class UserProfile(models.Model):
-#     user = models.ForeignKey(User, unique=True)
-#     image = models.ImageField(upload_to='', blank=True, null=True)
+class UserProfile(models.Model):
+    user = models.ForeignKey(User, unique=True)
+    image = models.ImageField(upload_to='', blank=True, null=True)
+
+

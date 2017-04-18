@@ -135,3 +135,4 @@ STATICFILES_DIRS = (
 )
 
 AUTH_USER_MODEL = 'accounts.User'
+AUTH_PROFILE_MODULE = 'accounts.UserProfile'

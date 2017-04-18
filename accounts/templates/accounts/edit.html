@@ -1,0 +1,22 @@
+{% extends "accounts/base.html" %}
+
+{% load staticfiles %}
+{% load material_form %}
+
+{% block title %}{{ profile_user.username }}{% endblock %}
+
+{% block content %}
+
+    <div class="left-panel">
+        <div class="card">
+            <form method="post" class="viewform">
+                {% csrf_token %}
+                <div class="card-content">
+                    <span class="card-title gray-text text-darken-2">Edit user info</span>
+                    {% form form=form %}{% endform %}
+                    <button type="submit" name="_submit" class="btn btn-primary btn-lg">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
