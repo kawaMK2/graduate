@@ -1,0 +1,36 @@
+{% extends "accounts/base.html" %}
+
+{% load staticfiles %}
+
+{% block title %}{{ profile_user.username }}{% endblock %}
+
+{% block content %}
+    <div class="left-panel">
+        <div class="card">
+            <div class="card-content">
+                <div class="card-title gray-text text-darken-2">
+                    <span class="card-title gray-text text-darken-2">
+                        {% if profile_user == request.user %}
+                            My page
+                        {% else %}
+                            お前じゃない
+                        {% endif %}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% if profile_user == request.user %}
+        <div class="right-panel">
+            <div class="card">
+                <div class="card-content">
+                    <div class="card-title">
+                        edit
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+{% endblock %}

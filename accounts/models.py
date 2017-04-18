@@ -13,6 +13,7 @@ class Grade(models.Model):
 class User(AbstractUser):
     belongs = models.ManyToManyField(Grade, through='Belong')
     objects = auth_models.UserManager()
+    # avatar = models.ImageField(upload_to='static/media/images/avatars/', null=True, blank=True)
 
     def get_full_name(self):
         return '%s %s' % (self.last_name, self.first_name)

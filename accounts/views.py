@@ -12,6 +12,5 @@ def redirect_profile(request):
 
 
 def profile_page(request, username):
-    login_user = request.user
     profile_user = get_object_or_404(User, username=username)
-    return render(request, "profile.html", {"profile_user": profile_user, "login_user": login_user})
+    return render(request, "accounts/profile.html", {"profile_user": profile_user})
