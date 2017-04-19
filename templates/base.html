@@ -7,11 +7,11 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
         {% block favicon %}<link href="{% static 'material/imgs/favicon.png' %}" rel="shortcut icon">{% endblock %}
-        <title>{% block title %}{% endblock %}</title>
+        <title>卒検ノート {% block title %}{% endblock %}</title>
         {% block css %}
         {% include 'admin/includes/material_css.html' %}
         {% block extrastyle %}{% endblock %}
-            <link rel="stylesheet" href="http://fonts.googleapis.com/earlyaccess/notosansjp.css">
+            <link rel="stylesheet" href="{% static "css/notesansjp.css" %}/">
         {% endblock css %}
         {% block blockbots %}<meta name="robots" content="NONE,NOARCHIVE" />{% endblock %}
         {% block js %}
@@ -46,9 +46,12 @@
                         <a href="#"><img class="circle" src="{% static 'material/imgs/user.png' %}"></a>
                         {% endif %}
                         {% endblock %}
-                        <span class="white-text name">{{ request.user.get_full_name }}</span>
-                        <a href="/accounts/{{ request.user.get_username }}/"><span class="white-text email">{{ request.user.get_username|title }}</span></a>
-{#                        <a href="#"><span class="white-text email">{{ request.user.email }}</span></a>#}
+                        {% if user.is_authenticated %}
+                            <span class="white-text name"><p class="note500">{{ request.user.get_full_name }}</p></span>
+                            <a href="/accounts/profile/{{ request.user.get_username }}/"><span class="white-text email">{{ request.user.get_username|title }}</span></a>
+                        {% else %}
+                            <span class="white-text name">Not login</span>
+                        {% endif %}
                     </div>
                 </li>
                 {% endblock %}
@@ -60,7 +63,7 @@
             <li class="active">
                 <a href="/">Top</a>
                 {% if user.is_authenticated %}
-                    <a href="/accounts/{{ user.username }}/">Home</a>
+                    <a href="/accounts/profile/{{ user.username }}/">Home</a>
                 {% endif %}
             </li>
             </ul>
@@ -75,15 +78,15 @@
                         {% if not is_popup %}<a href="#" data-activates="slide-out" class="button-collapse"><i class="material-icons">menu</i></a>{% endif %}
                         <div class="brand-logo">
                             {% block page_title %}
-                            <a href="/" class="page-title">{% block brand-logo %}<p class="note100">Note</p>{% endblock %}</a>
+                            <a href="/" class="page-title">{% block brand-logo %}<p class="note100">卒検ノート</p>{% endblock %}</a>
                             {% endblock %}
                         </div>
                         <ul id="nav-mobile" class="right hide-on-med-and-down">
                             {% block userlinks %}
                             {% if user.is_authenticated %}
-                            <li><a href="/accounts/logout" data-turbolinks="false"><i class="material-icons right">exit_to_app</i>{% trans "Log out" %}</a></li>
+                                <li><p class="note100"><a href="/accounts/logout" data-turbolinks="false"><i class="material-icons right">exit_to_app</i>{% trans "Log out" %}</a></p></li>
                             {% else %}
-                            <li><a href="/accounts/login" data-turbolinks="false"><i class="material-icons right">lock_open</i>{% trans "Log in" %}</a></li>
+                            <li><p class="note100"><a href="/accounts/login" data-turbolinks="false"><i class="material-icons right">lock_open</i>{% trans "Log in" %}</a></p></li>
                             {% endif %}
                             {% endblock %}
                         </ul>
@@ -119,7 +122,7 @@
         <script type="text/javascript">
             $(document).ready(function() {
                 {% for message in messages %}
-                Materialize.toast('{{ message|capfirst }}', 10000, 'alert-{{ message.tags }}')
+                Materialize.toast('{{ message|capfirst }}', 10000, 'alert-{{ message.tags }}');
                 {% endfor %}
             });
         </script>

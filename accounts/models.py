@@ -24,10 +24,3 @@ class Belong(models.Model):
     grade = models.ForeignKey(Grade)
     start_time = models.DateField()
     end_time = models.DateField(null=True, blank=True)
-
-
-class UserProfile(models.Model):
-    user = models.ForeignKey(User, unique=True)
-    image = models.ImageField(upload_to='', blank=True, null=True)
-
-
