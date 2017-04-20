@@ -3,6 +3,6 @@ from django.contrib.auth.admin import UserAdmin
 from .models import *
 
 # Register your models here.
-admin.site.register(User, UserAdmin)
+admin.site.register(User)
 admin.site.register(Belong)
 admin.site.register(Grade)

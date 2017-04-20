@@ -1,4 +1,5 @@
-{% load admin_static material_admin i18n %}<!DOCTYPE html>
+{% load admin_static material_admin i18n %}
+{% load imagekit %}<!DOCTYPE html>
 {% get_current_language as LANGUAGE_CODE %}
 <html lang="{{ LANGUAGE_CODE|default:"en-us" }}">
     <head>
@@ -40,8 +41,8 @@
                     <div class="userView">
                         <img class="background" src="{% static 'material/imgs/sidenav.svg' %}">
                         {% block userphoto %}
-                        {% if user.photo.url %}
-                        <a href="#"><img class="circle" src="{{ user.photo.url }}"></a>
+                        {% if user.avatar %}
+                        <a href="/accounts/profile/{{ request.user.get_username }}/"><img class="circle" src="{{ user.avatar_thumbnail.url }}"></a>
                         {% else %}
                         <a href="#"><img class="circle" src="{% static 'material/imgs/user.png' %}"></a>
                         {% endif %}
@@ -50,7 +51,7 @@
                             <span class="white-text name"><p class="note500">{{ request.user.get_full_name }}</p></span>
                             <a href="/accounts/profile/{{ request.user.get_username }}/"><span class="white-text email">{{ request.user.get_username|title }}</span></a>
                         {% else %}
-                            <span class="white-text name">Not login</span>
+                            <a href="/accounts/login/"><span class="white-text name">Login</span></a>
                         {% endif %}
                     </div>
                 </li>

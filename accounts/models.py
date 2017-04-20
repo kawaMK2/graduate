@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth import models as auth_models
+from imagekit.models import ImageSpecField
+from imagekit.processors import ResizeToFill
 
 
 # Create your models here.
@@ -13,9 +15,11 @@ class Grade(models.Model):
 class User(AbstractUser):
     belongs = models.ManyToManyField(Grade, through='Belong')
     objects = auth_models.UserManager()
-    # avatar = models.ImageField(upload_to='static/media/images/avatars/', null=True, blank=True)
+    avatar = models.ImageField(upload_to="avatar", null=True, blank=True)
+    avatar_thumbnail = ImageSpecField(source="avatar", processors=[ResizeToFill(100, 100)], format='JPEG', options={'quality': 60})
 
     def get_full_name(self):
+        self.get_username()
         return '%s %s' % (self.last_name, self.first_name)
 
 
