@@ -42,14 +42,14 @@
                         <img class="background" src="{% static 'material/imgs/sidenav.svg' %}">
                         {% block userphoto %}
                         {% if user.avatar %}
-                        <a href="/accounts/profile/{{ request.user.get_username }}/"><img class="circle" src="{{ user.avatar_thumbnail.url }}"></a>
+                        <a href="/accounts/user/{{ request.user.get_username }}/"><img class="circle" src="{{ user.avatar_thumbnail.url }}"></a>
                         {% else %}
                         <a href="#"><img class="circle" src="{% static 'material/imgs/user.png' %}"></a>
                         {% endif %}
                         {% endblock %}
                         {% if user.is_authenticated %}
-                            <span class="white-text name"><p class="note500">{{ request.user.get_full_name }}</p></span>
-                            <a href="/accounts/profile/{{ request.user.get_username }}/"><span class="white-text email">{{ request.user.get_username|title }}</span></a>
+                            <span class="white-text name">{{ request.user.get_full_name }}</span>
+                            <a href="/accounts/user/{{ request.user.get_username }}/"><span class="white-text email">{{ request.user.get_username|title }}</span></a>
                         {% else %}
                             <a href="/accounts/login/"><span class="white-text name">Login</span></a>
                         {% endif %}
@@ -64,7 +64,7 @@
             <li class="active">
                 <a href="/">Top</a>
                 {% if user.is_authenticated %}
-                    <a href="/accounts/profile/{{ user.username }}/">Home</a>
+                    <a href="/accounts/user/{{ user.username }}/">Home</a>
                 {% endif %}
             </li>
             </ul>

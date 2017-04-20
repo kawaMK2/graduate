@@ -10,11 +10,11 @@
             <form method="post" class="viewform">
                 <div class="card-content">
                     <div class="card-title">
-                        Index
+                        {{ note.title }}
                     </div>
-                        {% for user in users %}
-                            <a href="/accounts/user/{{ user.username }}/"><p class="note200">{{ user.get_full_name }}</p></a>
-                        {% endfor %}
+                    <div class="card-panel">
+                        {{ note.content }}
+                    </div>
                 </div>
             </form>
         </div>
@@ -24,8 +24,8 @@
         <div class="card">
             <div class="card-content">
                 <div class="card-title">Tags</div>
-                {% for tag in tags %}
-                    <p class="note100"><a href="/notes/tag/{{ tag.id }}">{{ tag.name }}</a></p>
+                {% for tag in note.tag.all %}
+                    ・ <a href="/notes/tag/{{ tag.id }}">{{ tag.name }}</a>
                 {% endfor %}
             </div>
         </div>

@@ -10,13 +10,15 @@
             <div class="card-content">
                 <div class="card-title gray-text text-darken-2">
                     <span class="card-title gray-text text-darken-2">
-                        {% if profile_user == request.user %}
-                            My page
-                        {% else %}
-                            <p class="note100">お前じゃない</p>
-                        {% endif %}
+                        {{ profile_user.get_full_name }}
                     </span>
                 </div>
+                <p class="note300">ノート一覧</p>
+                {% for note in notes %}
+                    {% if note.user == profile_user %}
+                        ・ <a href="/notes/note/{{ note.title }}">{{ note.title }}</a><br>
+                    {% endif %}
+                {% endfor %}
             </div>
         </div>
     </div>
