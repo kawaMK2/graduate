@@ -20,6 +20,12 @@ class Note(models.Model):
     text_type = models.IntegerField()
     has_metadata = models.BooleanField(default=False)
 
+    def tag_list(self):
+        tags = []
+        for tag in self.tag.all():
+            tags.append(tag.name)
+        return ', '.join(tags)
+
 
 class Comment(models.Model):
     name = models.CharField(max_length=100)

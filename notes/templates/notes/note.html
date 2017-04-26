@@ -15,6 +15,9 @@
                     <div class="card-panel">
                         {{ note.content }}
                     </div>
+                    {% if request.user == note.user %}
+                        <button type="button" onclick="location.href='/notes/edit/{{ note.title }}'" class="waves-effect waves-light btn">Edit</button>
+                    {% endif %}
                 </div>
             </form>
         </div>
@@ -25,7 +28,7 @@
             <div class="card-content">
                 <div class="card-title">Tags</div>
                 {% for tag in note.tag.all %}
-                    ・ <a href="/notes/tag/{{ tag.id }}">{{ tag.name }}</a>
+                    ・ <a href="/notes/tag/{{ tag.id }}">{{ tag.name }}</a><br>
                 {% endfor %}
             </div>
         </div>

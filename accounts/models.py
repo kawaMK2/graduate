@@ -16,7 +16,7 @@ class User(AbstractUser):
     belongs = models.ManyToManyField(Grade, through='Belong')
     objects = auth_models.UserManager()
     avatar = models.ImageField(upload_to="avatar", null=True, blank=True)
-    avatar_thumbnail = ImageSpecField(source="avatar", processors=[ResizeToFill(100, 100)], format='JPEG', options={'quality': 60})
+    avatar_thumbnail = ImageSpecField(source="avatar", processors=[ResizeToFill(100, 100)], format='PNG', options={'quality': 80})
 
     def get_full_name(self):
         self.get_username()
