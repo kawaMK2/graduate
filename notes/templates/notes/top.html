@@ -5,19 +5,39 @@
 {% block title %}{% endblock %}
 
 {% block content %}
+
     <div class="left-panel">
-        <div class="card">
-            <form method="post" class="viewform">
+
+        {% for grade_table in grade_tables %}
+
+            <div class="card">
                 <div class="card-content">
-                    <div class="card-title">
-                        Index
-                    </div>
-                        {% for user in users %}
-                            <a href="/accounts/user/{{ user.username }}/"><p class="note200">{{ user.get_full_name }}</p></a>
+                    <span class="card-title">
+                        {{ grade_table.year }} 年度
+                    </span>
+
+                    <div class="app-list">
+                        {% for user_table in grade_table.user_table %}
+                            <div class="app">
+                                <div class="card-panel">
+                                    <div class="app-item col s6 m6 l10">
+                                        <p class="note300">{{ user_table.grade.formal_name }}</p>
+                                        {% for user in user_table.users %}
+                                            <p class="note100">・<a href="/accounts/user/{{ user.get_username }}/">
+                                                {{ user.get_full_name }}
+                                            </a></p>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
                         {% endfor %}
+                    </div>
+
                 </div>
-            </form>
-        </div>
+            </div>
+
+
+        {% endfor %}
     </div>
 
     <div class="right-panel">
