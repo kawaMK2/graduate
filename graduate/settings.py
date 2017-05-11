@@ -28,7 +28,7 @@ SECRET_KEY = 'docc%=*szf)r6zbm01ois3&_w#d&=5b7w9&r$p8v-5!81n-n5y'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition

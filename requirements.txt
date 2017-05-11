@@ -2,7 +2,9 @@ appdirs==1.4.3
 Django==1.11.1
 django-appconf==1.0.2
 django-imagekit==4.0
+django-markdownx==2.0.21
 django-material==0.13.1
+Markdown==2.6.8
 olefile==0.44
 packaging==16.8
 pilkit==2.0

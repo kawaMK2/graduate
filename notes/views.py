@@ -1,18 +1,20 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.shortcuts import get_object_or_404
+from django.contrib.auth.decorators import login_required
 from .models import Tag, Note
+from .forms import AddForm
 from accounts.models import *
 
 
 # Create your views here.
 class GradeTable(object):
-    def __init__(self, year, user_table=[]):
+    def __init__(self, year, user_table):
         self.year = year
         self.user_table = user_table
 
 
 class UserTable(object):
-    def __init__(self, grade, users=[]):
+    def __init__(self, grade, users):
         self.grade = grade
         self.users = users
 
@@ -53,3 +55,25 @@ def tag(request, tag_id):
 def edit(request, note_title):
     current_note = get_object_or_404(Note, title=note_title)
     return render(request, "notes/edit.html", {"note": current_note})
+
+
+@login_required
+def add(request):
+    if request.method == "POST":
+        form = AddForm(data=request.POST)
+        if form.is_valid():
+            user = request.user
+            title = request.POST.get("title", "")
+            content = request.POST.get("content", "")
+            locate = request.POST.get("locate", "")
+            date = request.POST.get("date", "")
+            start_time = request.POST.get("start_time", "")
+            end_time = request.POST.get("end_time", "")
+            elapsed_time = request.POST.get("elapsed_time", "")
+            text_type = request.POST.get("text_type", "")
+            new_note = Note(title=title, content=content, locate=locate, date=date, start_time=start_time, end_time=end_time, elapsed_time=elapsed_time, user=user, text_type=text_type)
+            new_note.save()
+            return redirect("/accounts/user/" + request.user.username)
+    else:
+        form = AddForm()
+    return render(request, "notes/add.html", {"add_form": form})

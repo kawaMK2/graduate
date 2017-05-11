@@ -12,9 +12,20 @@
                     <div class="card-title">
                         {{ note.title }}
                     </div>
+
                     <div class="card-panel">
                         {{ note.content }}
                     </div>
+
+                    <div class="card-content">
+                        <p class="note100"><span class="dan1">日付</span><span class="dan2">{{ note.date }}</span></p>
+                        <p class="note100"><span class="dan1">場所</span><span class="dan2">{{ note.locate }}</span></p>
+                        <p class="note100"><span class="dan1">開始時間</span><span class="dan2">{{ note.start_time }}</span></p>
+                        <p class="note100"><span class="dan1">終了時間</span><span class="dan2">{{ note.end_time }}</span></p>
+                        <p class="note100"><span class="dan1">時間</span><span class="dan2">{{ note.elapsed_time }}</span></p>
+                        <p class="note100"><span class="dan1">筆者</span><span class="dan2">{{ note.user.get_full_name }}</span></p>
+                    </div>
+
                     {% if request.user == note.user %}
                         <button type="button" onclick="location.href='/notes/edit/{{ note.title }}'" class="waves-effect waves-light btn">Edit</button>
                     {% endif %}

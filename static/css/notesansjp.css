@@ -47,3 +47,12 @@ p.note500 {
     font-style: normal;
     font-weight: 500;
 }
+
+span.dan1 {
+    float: left;
+}
+
+span.dan2 {
+    display: block;
+    margin-left: 110px;
+}

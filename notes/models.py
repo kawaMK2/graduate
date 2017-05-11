@@ -1,4 +1,5 @@
 from django.db import models
+# from markdownx.models import MarkdownxField
 from accounts.models import User
 
 
@@ -10,6 +11,7 @@ class Tag(models.Model):
 class Note(models.Model):
     title = models.CharField(max_length=200)
     content = models.TextField()
+    # markdown_content = MarkdownxField()
     locate = models.CharField(max_length=100)
     date = models.DateField()
     start_time = models.DateTimeField()
