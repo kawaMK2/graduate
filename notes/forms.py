@@ -14,4 +14,3 @@ class AddForm(forms.Form):
     text_type = forms.ChoiceField(label='テキストタイプ', choices=((1, 'html'), (2, 'wiki'), (3, 'markdown')))
 
     layout = Layout('title', Row('locate', 'date'), Row('start_time', 'end_time'), Row('elapsed_time', 'text_type'), 'content')
-

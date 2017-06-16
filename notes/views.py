@@ -54,7 +54,25 @@ def tag(request, tag_id):
 
 def edit(request, note_title):
     current_note = get_object_or_404(Note, title=note_title)
-    return render(request, "notes/edit.html", {"note": current_note})
+    if request.method == "POST":
+        form = AddForm(data=request.POST)
+        if form.is_valid():
+            data = request.POST
+            new_note = Note(title=data.get("title", ""),
+                            content=data.get("content", ""),
+                            locate=data.get("locate", ""),
+                            date=data.get("date", ""),
+                            start_time=data.get("start_time", ""),
+                            end_time=data.get("end_time", ""),
+                            elapsed_time=data.get("elapsed_time", ""),
+                            user=request.user,
+                            text_type=data.get("text_type", ""))
+            new_note.save()
+            return redirect("/accounts/user/" + request.user.username)
+    else:
+        # form = AddForm(data=current_note)
+        form = AddForm()
+    return render(request, "notes/edit.html", {"note": current_note, "edit_form": form})
 
 
 @login_required
@@ -62,16 +80,16 @@ def add(request):
     if request.method == "POST":
         form = AddForm(data=request.POST)
         if form.is_valid():
-            user = request.user
-            title = request.POST.get("title", "")
-            content = request.POST.get("content", "")
-            locate = request.POST.get("locate", "")
-            date = request.POST.get("date", "")
-            start_time = request.POST.get("start_time", "")
-            end_time = request.POST.get("end_time", "")
-            elapsed_time = request.POST.get("elapsed_time", "")
-            text_type = request.POST.get("text_type", "")
-            new_note = Note(title=title, content=content, locate=locate, date=date, start_time=start_time, end_time=end_time, elapsed_time=elapsed_time, user=user, text_type=text_type)
+            data = request.POST
+            new_note = Note(title=data.get("title", ""),
+                            content=data.get("content", ""),
+                            locate=data.get("locate", ""),
+                            date=data.get("date", ""),
+                            start_time=data.get("start_time", ""),
+                            end_time=data.get("end_time", ""),
+                            elapsed_time=data.get("elapsed_time", ""),
+                            user=request.user,
+                            text_type=data.get("text_type", ""))
             new_note.save()
             return redirect("/accounts/user/" + request.user.username)
     else:

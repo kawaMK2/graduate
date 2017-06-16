@@ -2,6 +2,8 @@
 
 {% load staticfiles %}
 
+{% load material_form %}
+
 {% block title %}{% endblock %}
 
 {% block content %}
@@ -11,10 +13,14 @@
             <form method="post" class="viewform">
                 <div class="card-content">
                     <div class="card-title">
-                        Edit
+                        編集
                     </div>
-                    {{ note.title }}
-                    <p class="note100">編集タイム</p>
+                    <form method="POST">
+                        {% csrf_token %}
+                        {% form form=edit_form layout=edit_form.layout %}{% endform %}
+                        <button type="reset" name="_reset" class="btn red">戻る</button>
+                        <button type="submit" name="_submit" class="btn right">編集</button>
+                    </form>
                 </div>
             </form>
         </div>
