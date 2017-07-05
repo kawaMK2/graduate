@@ -8,3 +8,7 @@ Django 1.11.1
 管理者アカウント  
 username: admin  
 password: adminpassword
+
+## installation
+pip install -r requirements.txt  
+python manage.py runserver
