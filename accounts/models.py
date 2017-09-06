@@ -7,9 +7,6 @@ from imagekit.processors import ResizeToFill
 
 # Create your models here.
 class Grade(models.Model):
-    def __init__(self):
-        pass
-
     name = models.CharField(max_length=100)
     formal_name = models.CharField(max_length=100)
     priority = models.IntegerField()
